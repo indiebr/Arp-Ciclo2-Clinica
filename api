@@ -1,0 +1,27 @@
+/* Curso de Engenharia de Software - UniEVANGÉLICA 
+Disciplina de Programação Web 
+Dev: Pedro Henrique Pereira de Melo 2111562 
+DATA 17/05/2023 */
+
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+let patients = [];
+
+// Rota para cadastrar um novo paciente
+app.post('/patients', (req, res) => {
+  const { name, age, gender } = req.body;
+  const newPatient = { name, age, gender };
+  patients.push(newPatient);
+  res.status(201).json(newPatient);
+});
+
+// Rota para listar todos os pacientes cadastrados
+app.get('/patients', (req, res) => {
+  res.json(patients);
+});
+
+app.listen(3000, () => {
+  console.log('API de cadastro de pacientes está rodando na porta 3000.');
+});

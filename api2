@@ -1,0 +1,28 @@
+/* Curso de Engenharia de Software - UniEVANGÉLICA 
+Disciplina de Programação Web 
+Dev: Pedro Henrique Pereira de Melo 2111562 
+DATA 17/05/2023 */
+
+
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+let agendas = [];
+
+// Rota para cadastrar um novo evento na agenda
+app.post('/agenda', (req, res) => {
+  const { title, date, description } = req.body;
+  const newEvent = { title, date, description };
+  agendas.push(newEvent);
+  res.status(201).json(newEvent);
+});
+
+// Rota para listar todos os eventos da agenda
+app.get('/agenda', (req, res) => {
+  res.json(agendas);
+});
+
+app.listen(3001, () => {
+  console.log('API de cadastro e listagem de agendas está rodando na porta 3001.');
+});
